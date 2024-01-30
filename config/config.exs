@@ -29,6 +29,8 @@ config :elixirMLNews, ElixirMLNewsWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :elixirMLNews, ElixirMLNews.Mailer, adapter: Swoosh.Adapters.Local
 
+config :elixirMLNews, ElixirMLNews.API, api_key: System.get_env("NEWS_API_KEY")
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",

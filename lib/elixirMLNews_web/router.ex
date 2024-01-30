@@ -17,7 +17,8 @@ defmodule ElixirMLNewsWeb.Router do
   scope "/", ElixirMLNewsWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", FeedLive.Index, :index
+    # get "/", PageController, :home
   end
 
   # Other scopes may use custom stacks.

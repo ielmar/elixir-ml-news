@@ -17,9 +17,11 @@ defmodule ElixirMLNews.Application do
       # Start Finch
       {Finch, name: ElixirMLNews.Finch},
       # Start the Endpoint (http/https)
-      ElixirMLNewsWeb.Endpoint
+      ElixirMLNewsWeb.Endpoint,
       # Start a worker by calling: ElixirMLNews.Worker.start_link(arg)
       # {ElixirMLNews.Worker, arg}
+      # Start "ElixirMLNews Stream"
+      ElixirMLNews.Stream
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -36,3 +38,14 @@ defmodule ElixirMLNews.Application do
     :ok
   end
 end
+
+{Nx.Serving,
+ serving: ElixirMLNews.Enrichments.Sentiment.serving(),
+ name: ElixirMLNews.Enrichments.Sentiment,
+ batch_size: 8}
+
+{Nx.Serving,
+ serving: ElixirMLNews.Enrichments.NER.serving(),
+ name: ElixirMLNews.Enrichments.NER,
+ batch_size: 8,
+ sequence_length: 128}
