@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :elixirMLNews, ElixirMLNews.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "elixirmlnews_dev",
+  username: System.get_env("DB_USER"),
+  password: System.get_env("DB_PASS"),
+  hostname: System.get_env("DB_HOST"),
+  database: System.get_env("DB_NAME"),
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
